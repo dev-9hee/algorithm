@@ -1,0 +1,7 @@
+-- 회원ID, 이름, 성별, 생년월일
+SELECT MEMBER_ID, MEMBER_NAME, GENDER, DATE_FORMAT(DATE_OF_BIRTH, '%Y-%m-%d')
+FROM MEMBER_PROFILE
+WHERE DATE_OF_BIRTH LIKE "%_03_%" AND -- 생일이 3월인
+    GENDER = 'W' AND -- 여성회원
+    TLNO IS NOT NULL -- 전화번호가 NULL인 경우는 제외
+ORDER BY MEMBER_ID ASC; -- 회원ID를 기준으로 오름차순 정렬
