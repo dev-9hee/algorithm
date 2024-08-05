@@ -3,24 +3,23 @@ import java.util.*;
 class Solution {
     public int solution(String s) {
         String extendedS = s + s;
-        int ans = 0; // 리턴할 값
+        int ans = 0; // x의 개수, 리턴할 값
         
-        for (int i=0; i<s.length(); i++) { // s의 길이만큼 순회
-            // isValid가 true면 유효한 괄호이므로 ans++;
+        for (int i=0; i<s.length(); i++) {
+            // isValid()가 true면 올바른 괄호이므로 ans++;
             if (isValid(extendedS.substring(i, s.length()+i))) ans++;
         }
         return ans;
     }
     
-    public boolean isValid(String s) { // 유효한 괄호인지 체크
-        Deque<Character> stack = new ArrayDeque<>();
+    public boolean isValid(String s) {
+        Deque<Character> stack = new ArrayDeque<>(); // 스택선언
         
         for (char current : s.toCharArray()) {
             if (current == '(' || current == '{' || current == '[') {
-                stack.push(current); // 여는 괄호면 스택에 넣기
+                stack.push(current);
             } else {
-                // 닫는 괄호일 때 스택이 비어있다면 짝 여는 괄호가 없는 것
-                if (stack.isEmpty()) return false; 
+                if (stack.isEmpty()) return false;
                 
                 char target = stack.pop();
                 if ((target == '(' && current != ')') ||
@@ -30,6 +29,6 @@ class Solution {
                 }
             }
         }
-        return stack.isEmpty(); // 최종적으로 비어있으면 유효한 괄호
+        return stack.isEmpty(); // 비어있으면 true => 올바른 괄호
     }
 }
