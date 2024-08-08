@@ -17,11 +17,11 @@ class Solution {
         // bfs 초기화
         boolean[] visited = new boolean[n+1];
         Queue<int[]> queue = new ArrayDeque<>();
-        queue.add(new int[]{1, 0}); // 시작 노드 1, 현재 거리는 0
-        visited[1] = true; // 방문 표시
+        queue.add(new int[]{1, 0}); // 시작 노드와 현재 거리
+        visited[1] = true; // 시작 노드 방문 처리
         
         // bfs 탐색
-        int maxDist = 0, count = 0; // 최대 거리, 최대 거리의 노드 수
+        int maxDist = 0, count = 0; // 최대 거리와 최대 거리의 노드 수
         while (!queue.isEmpty()) {
             int[] cur = queue.remove();
             // cur[0] : 현재 노드, cur[1] : 현재 거리
@@ -34,12 +34,12 @@ class Solution {
                 count++;
             }
             
-            // 자식 간선 탐색
+            // 인접 노드 탐방
             for (int next : graph.get(cur[0])) {
                 if (visited[next]) continue; // 이미 방문
                 
-                visited[next] = true;
-                queue.add(new int[]{next, cur[1] + 1});
+                visited[next] = true; // 방문 표시
+                queue.add(new int[]{next, cur[1]+1});
             }
         }
         return count;
