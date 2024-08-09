@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public int solution(String s) {
         String extendedS = s + s;
-        int ans = 0; // 올바른 괄호 수
+        int ans = 0; // 올바른 괄호의 수
         
         for (int i=0; i<s.length(); i++) {
             // isValid()가 true면 올바른 괄호이므로 ans++
@@ -29,7 +29,6 @@ class Solution {
                 }
             }
         }
-        
-        return stack.isEmpty();
+        return stack.isEmpty(); // 스택이 비어있으면 올바른 괄호
     }
 }
