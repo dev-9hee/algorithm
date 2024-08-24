@@ -4,38 +4,37 @@ class Solution {
     Set<Integer> candidates = new HashSet<>();
     
     public int solution(String numbers) {
-        // 순열조합, 숫자 조합
-        per(numbers, 0, new boolean[numbers.length()], 0);
-        
+        // 숫자 조합
+        permutation(numbers, 0, new boolean[numbers.length()], 0);
         // 소수 찾기
         int ans = 0;
         for (int num : candidates) {
-            if(isPrime(num)) ans++; // 소수면 개수 증가
+            if (isPrime(num)) ans++; // true면 소수이므로 증가
         }
         return ans;
     }
     
-    // 숫자 문자열, 현재 숫자, 방문여부, 현재 자릿수
-    void per(String numbers, int cur, boolean[] visited, int digit) {
+    void permutation(String numbers, int cur, boolean[] visited, int digit) {
         if (digit == numbers.length()) return;
         
         for (int i=0; i<numbers.length(); i++) {
-            if(visited[i]) continue; // 이미 방문
+            if (visited[i]) continue;
             
             int newValue = cur + (int)((numbers.charAt(i) - '0') * Math.pow(10, digit));
-            candidates.add(newValue); // hashset에 추가
+            candidates.add(newValue);
             
             visited[i] = true;
-            per(numbers, newValue, visited, digit + 1);
-            visited[i] = false;
+            permutation(numbers, newValue, visited, digit + 1);
+            visited[i] = false; // 백트레킹을 위함
         }
     }
     
-    boolean isPrime(int num) {
-        if (num < 2) return false;
+    // 소수 판별
+    boolean isPrime(int n) {
+        if(n < 2) return false;
         
-        for (int i=2; i*i<=num; i++) {
-            if (num % i == 0) return false;
+        for (int i=2; i*i<=n; i++) {
+            if (n % i == 0) return false;
         }
         
         return true;
