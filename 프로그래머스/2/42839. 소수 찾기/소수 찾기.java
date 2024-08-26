@@ -9,17 +9,16 @@ class Solution {
         // 소수 찾기
         int ans = 0;
         for (int num : candidates) {
-            if (isPrime(num)) ans++; // 소수면 개수 증가
+            if (isPrime(num)) ans++;
         }
         return ans;
     }
     
-    // cur : 현재 수, digit : 현재 자리 수
     void permutation(String numbers, int cur, boolean[] visited, int digit) {
         if (digit == numbers.length()) return;
         
         for (int i=0; i<numbers.length(); i++) {
-            if (visited[i]) continue; // 이미 방문했다면 패스!
+            if (visited[i]) continue; // 이미 방문했으면 패스!!
             
             int newValue = cur + (int)((numbers.charAt(i) - '0') * Math.pow(10, digit));
             candidates.add(newValue);
